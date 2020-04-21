@@ -8,6 +8,7 @@ from keras.models import Sequential
 from keras.layers import Activation, Dense
 from keras.callbacks import Callback
 import numpy as np
+import matplotlib.pyplot as plt 
 
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument('-i', help='File name of input image', dest='input_filename', type=str, default='keyboard.png')
@@ -62,6 +63,7 @@ class CheckpointOutputs(Callback):
             predicted_image = self.model.predict(x, verbose=False)
             predicted_image = np.clip(predicted_image, 0, 1)
             predicted_image = predicted_image.reshape(image.shape)
+            plt.imshow(predicted_image)
 
             with warnings.catch_warnings():
                 output_file_path = os.path.join(
